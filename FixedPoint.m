@@ -1,7 +1,7 @@
 function x = FixedPoint( g, x_0, n )
 %FIXEDPOINT Summary of this function goes here
 %   Detailed explanation goes here
-if nargs < 3
+if nargin < 3
     n = 32;
 end
 x = x_0;
