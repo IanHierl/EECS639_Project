@@ -3,13 +3,12 @@ function [ys,ts] = A4(f,y0,t0,n,h)
     deg = length(y0);
     ys = zeros(deg, n+1);
     ts = linspace(t0, t0 + h*n, n+1);
-    ys(:,1) = y0;
     
     %First, use single-step method to obtain initial values for the
     %multi-step predictor method
     %Single-step method used: 4th-order Runge-Kutta
-    [ys(:,2:4),~] = RK4(@f,y0,t0,3,h);
-    [y1,y2,y3] = deal(ys(:,2),ys(:,3),ys(:,4));
+    [ys(:,1:4),~] = RK4(f,y0,t0,3,h);
+    [y0,y1,y2,y3] = deal(ys(:,1),ys(:,2),ys(:,3),ys(:,4));
     t = t0 + 4*h;
     
     %Iterate in PECE mode until number of steps have been reached
