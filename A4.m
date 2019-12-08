@@ -1,4 +1,4 @@
-function [ys,ts] = A4(y0,t0,h,n,f)
+function [ys,ts] = A4(f,y0,t0,n,h)
     
     deg = length(y0);
     ys = zeros(deg, n+1);
