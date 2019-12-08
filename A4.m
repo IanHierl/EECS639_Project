@@ -6,8 +6,7 @@ function s = A4(y0,t0,h,n,f)
     y2 = RK4(y1);
     y3 = RK4(y2);
     
-    %Iterate in PECE mode until convergence (i.e., until |s - sold| <
-    %1e-8)
+    %Iterate in PECE mode until number of steps have been reached
     t = t0;
     sold = y3;                         %Last computed value for solution
     pred = AB4([y0,y1,y2,y3],t,h,f);   %Predictor method
