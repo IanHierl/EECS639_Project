@@ -1,9 +1,15 @@
-n = 100;
-h = 0.5;
+n = 1000;
+h = 0.01;
 
-[ ts, xs ] = EulerMethod( @Spring, [ 0.2, 0.0 ], 0, n, h )
+[ xs, ts ] = RungeKutta4( @Spring, [ 0.2; 0.0 ], 0, n, h )
 
-hold on
-plt = plot(  xs( 1, : ), ts );
-saveas( plt, 'myfigure.pdf' );
+plot( xs( 1, : ), ts );
+hold on;
+f = @ ( t ) ( cos(8*t)/5 );
+
+xs_true = f( ts );
+
+plot( xs_true, ts, 'r*' );
+
+saveas( gcf, 'myfigure.pdf' );
 hold off

@@ -10,12 +10,13 @@ function [ ys, ts ] = BackEM( f, y_0, t_0, n, h )
         r = @( y ) ( y_0 + h * f( t, y ) );
     end
 
-ys = zeros( 1, n + 1 );
+deg = length( y_0 );
+ys = zeros( deg, n + 1 );
 ts = linspace( t_0, t_0 + h*n, n + 1 );
-ys( 1 ) = y_0;
+ys( :, 1 ) = y_0;
 
 for k=2:n+1
-    ys( k ) = FixedPoint( g( ts( k ), ys( k - 1 ) ), ys( k - 1 ), 32 );
+    ys( :, k ) = FixedPoint( g( ts( k ), ys( :, k - 1 ) ), ys( :, k - 1 ), 32 );
 end
 
 end
