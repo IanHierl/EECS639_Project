@@ -1,4 +1,4 @@
-function s = A4(y0,t0,h,f)
+function s = A4(y0,t0,h,n,f)
     %First, use single-step method to obtain initial values for the
     %multi-step predictor method
     %Single-step method used: 4th-order Runge-Kutta
@@ -23,7 +23,7 @@ function s = A4(y0,t0,h,f)
     y3 = s;
     %The below while loop iterates over the above process until convergence
     %is reched
-    while (abs(s - sold) >= 1e-8)
+    for i=2:n           %Start at 2; the first iteration was handled above
         sold = s;
         pred = AB4([y0,y1,y2,y3],t,h,f);
         [y0,y1,y2,y3] = deal(y1,y2,y3,pred);
