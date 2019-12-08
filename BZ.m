@@ -1,6 +1,6 @@
 function [ func ] = BZ( constants )
 % u = [ a, b, x, y, z ];
-% u' = [ da/dt, db/dt, dx/dt, dy/dt, dz/dt ]
+% u' = [ da/dt, db/dt, dx/dt, dy/dt, dz/dt, dp/dt ]
 func = @(t,u) ( BZGen( t, u, constants ) );
 end
 
@@ -14,11 +14,19 @@ k3 = constants( 5 );
 k4 = constants( 6 );
 k5 = constants( 7 );
 
-uprime = zeros( 5, 1 );
-uprime( 1 ) = k4*u(3).*u(3) -k5*u(1).*u(3)-k3*u(1).*u(4);
-uprime( 2 ) = -k0*u(2).*u(5);
-uprime( 3 ) = k3*u(1).*u(4) - k2*u(3).*u(4) + k5*u(1).*u(3);
-uprime( 4 ) = -k3*u(1).*u(4) - k2*u(3).*u(4) + 0.5*f*k0*u(2).*u(5);
-uprime( 5 ) = 2*k5*u(1).*u(3) - k0*u(2).*u(5);
+A = u(1);
+B = u(2);
+X = u(3);
+Y = u(4);
+Z = u(5);
+P = u(6);
+
+uprime = zeros( 6, 1 );
+uprime( 1 ) = k4*X.*X -k5*A.*X-k3*A.*Y;
+uprime( 2 ) = -k0*B.*Z;
+uprime( 3 ) = k3*A.*Y - k2*X.*Y + k5*A.*X;
+uprime( 4 ) = -k3*A.*Y - k2*X.*Y + 0.5*f*k0*B.*Z;
+uprime( 5 ) = 2*k5*A.*X - k0*B.*Z;
+uprime( 6 ) = k3*A.*Y + 2*k2*X*Y + k4*X.*X;
 
 end
