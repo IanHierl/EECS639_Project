@@ -8,11 +8,10 @@ function [ uprime ] = BZGen( t, u, constants )
 
 f = constants( 1 );
 k0 = constants( 2 );
-k1 = constants( 3 );
-k2 = constants( 4 );
-k3 = constants( 5 );
-k4 = constants( 6 );
-k5 = constants( 7 );
+k2 = constants( 3 );
+k3 = constants( 4 );
+k4 = constants( 5 );
+k5 = constants( 6 );
 
 A = u(1);
 B = u(2);
