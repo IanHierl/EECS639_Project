@@ -6,32 +6,40 @@ close all;
 %u0( 6 ) = 0;
 %u0 = 0.25*u0 ./ (u0'*u0);
 
+constants = [
+   1.311147070430053 ;
+   4.350407178956268 ;
+   0.915131672126108 ;
+   6.146269580129458 ;
+   0.109790922908117 ;
+   5.732603832633724 ];
+
+u0 = [0.05; 0.05; 0.05; ]
+
 func = BZ( constants );
 
 t0 = 0;
-tf = 1500;
+tf = 100000;
 n = 10000;
 h = (tf - t0)/n;
 
 
-[ us, ts ] = A4( func, u0, 0, n, h );
-colors = {'k', 'y', 'r', 'g', 'b', 'cyan' };
+[ us, ts ] = Trapezoid( func, u0, 0, n, h );
+colors = {'r', 'g', 'b' };
 figure();
 
 hold on;
-for i=1:5
+for i=1:3
     plot( ts, us( i, :), colors{i} );
 end;
 hold off;
-%{
 figure();
 hold on;
-for i=1:6
-    for j=1:6
-        subplot( 6, 6, (i - 1 ) * 6 + j );
+for i=1:3
+    for j=1:3
+        subplot( 3, 3, ( i - 1 ) * 3 + j );
         plot( us( i, : ), us( j, : ) );
     end
 end
-%}
 
 hold off;
