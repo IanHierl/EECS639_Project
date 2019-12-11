@@ -1,4 +1,9 @@
 close all
+
+f = 256;
+xSize = 256;
+ySize = 256;
+
 constants = [
    1.311147070430053 ;
    4.350407178956268 ;
@@ -9,40 +14,33 @@ constants = [
 
 func = BZ( constants );
 
-us_init = zeros( 100, 100, 3 );
-for i=1:100
-    for j=1:100
-        us_init( i, j, : ) = 0.01.*randi( 10, 3, 1 ) + 0.05;
+us_init = zeros( xSize, ySize, 3 );
+for i=1:xSize
+    for j=1:ySize
+        us_init( i, j, : ) = 0.01.*randi( 10, 3, 1 );
     end
 end
 
-f = 500;
-us = zeros( 100, 100, f, 3 );
+us = zeros( xSize, ySize, f, 3 );
 us( :, :, 1, : ) = us_init;
 tic; 
 new_u = zeros( 3, 1 );
 t = 0;
 h = 10;
-uv = [1, 5, 1]/sqrt(27);
 for k=2:f
-    for i=1:100
-        for j=1:100
-            %{
-            new_u(1) = uv * us(i-1:i+1,j-1:j+1,k-1,1) * uv';
-            new_u(2) = uv * us(i-1:i+1,j-1:j+1,k-1,2) * uv';
-            new_u(3) = uv * us(i-1:i+1,j-1:j+1,k-1,3) * uv';
-            %}
+    for i=1:xSize
+        for j=1:ySize
             if i == 1
                 xRange = 1:2;
-            elseif i == 100
-                xRange = 99:100;
+            elseif i == xSize
+                xRange = xSize-1:xSize;
             else
                 xRange = i-1:i+1;
             end
             if j == 1
                 yRange = 1:2;
-            elseif j == 100
-                yRange = 99:100;
+            elseif j == ySize
+                yRange = ySize-1:ySize;
             else
                 yRange = j-1:j+1;
             end
@@ -69,5 +67,3 @@ for k=1:f
 end
 
 movie(frames);
-    
-    

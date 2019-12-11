@@ -1,6 +1,7 @@
+% Set step sizes and bounds
 t0 = 0;
 tf = 50;
-h = 0.0001;
+h = 0.01;
 
 n = floor( (tf-t0)/h );
 u0 = [0.2;0.0];
@@ -11,7 +12,8 @@ names = {'Euler', 'Backward Euler', 'Trapezoid', 'Runge-Kutta 4', 'Adams-Bashfor
 f = @(t)(cos(8*t)/5);
 xs_true = f(ts);
 
-for i=1:6
+% Plot and calculate for each solver
+for i=1:5
     subplot(6,1,i);
     if( i == 6 )
         xs = f(ts);

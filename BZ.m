@@ -1,6 +1,8 @@
 function [ func ] = BZ( constants )
-% u = [ x, y, z ];
-% u' = [ dx/dt, dy/dt, dz/dt ]
+% Takes a set of constants f, k0, k1, k2, k3, k4, k5
+% and returns the system of ODE's for X, Y, Z from the
+% BZ Reaction as a handler to a function that computes:
+% func( t, u ) = [ dX/dt, dY/dt, dZ/dt ];
 func = @(t,u) ( BZGen( t, u, constants ) );
 end
 
@@ -13,8 +15,8 @@ k3 = constants( 4 );
 k4 = constants( 5 );
 k5 = constants( 6 );
 
-A = 0.001;
-B = 0.001;
+A = 0.01;
+B = 0.01;
 X = u(1);
 Y = u(2);
 Z = u(3);

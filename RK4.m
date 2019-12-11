@@ -1,4 +1,4 @@
-function [ ys, ts ] = RungeKutta4( f, y_0, t_0, n, h )
+function [ ys, ts ] = RK4( f, y_0, t_0, n, h )
 % f     - function handler, y' = f( t, y )
 % y_0   - initial value
 % t_0   - initial time
